@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./vendors/css/normalize.css">
+    <link rel="stylesheet" href="./assest/css/style.css">
+    <link rel="stylesheet" href="./assest/images/about/themify-icons-font/themify-icons/themify-icons.css">
+    <!-- font google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <title>SG4Store | Ecommerce Website Design </title>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header__topnavbar" style="background-color: #000">
+                <marquee behavior="scroll" direction="left" scrollamount="10">
+                    <div class="header-promotion">
+                            <i class="fa-solid fa-globe"></i>
+                        <span>DAILY SALE UP TO 15% PLUSCLUB, COLORFUL PAINT TEE </span>
+                    </div>   
+                </marquee>
+            </div>
+            <div class="header__navbar" id="myHeader">
+                <div class="header__logo">
+                    <a href="index.html"><img src="./assest/images/web/sg4-removebg-preview.png" alt="logo" width="125px">
+                    </a>
+                </div>
+                    <nav class="navbar">
+                        <ul id="MenuItems" class="header__navbar-list">
+                            <li><a href="index.html">TRANG CHỦ</a></li>
+                            <li><a href="products-shirt.html">ÁO</a></li>
+                            <li><a href="products-pants.html">QUẦN</a></li>
+                            <li><a href="products-accessories.html">PHỤ KIỆN</a></li>
+                        </ul>
+                    </nav>
+                <a href="account.html"><button style="border:none" class="icon-user"><i class="fa-solid fa-user"></i></button></a>
+                <a href="cart.html"><button style="border:none" ><i class="fa-solid fa-cart-shopping"></i></button></a>
+                <button style="border:none" class="js-search" ><i class="fa-solid fa-magnifying-glass"></i></button>
+                <img src="./assest/images/menu.png" class="menu-icon"
+                onclick="menutoggle()">
+            </div>
+            <div class="header_botnavbar">
+                <ul class="bot-nav-list">
+                    <li class="bot-nav-items">
+                        <a href="./aboutus.html">Về chúng tôi</a>
+                    </li>
+                    <li class="bot-nav-items">
+                        <a href="./stores.html">Danh sách cửa hàng</a>
+                    </li>
+                    <li class="bot-nav-items">
+                        <a href="./collection.html">Bộ sưu tập</a>
+                    </li>
+                    <li class="bot-nav-items">
+                        <a href="./blog.html">Blog</a>
+                    </li>
+                    <li class="bot-nav-items">
+                        <a href="#footer">Liên hệ</a>
+                    </li>
+                </ul>
+            </div>
+
+            
+        </div>
+        <!-- <div class="slider">
+            <div class="slides">
+                <input type="radio" name = "radio-btn" id="radio1">
+                <input type="radio" name = "radio-btn" id="radio2">
+                <input type="radio" name = "radio-btn" id="radio3">
+                <input type="radio" name = "radio-btn" id="radio4">
+                <div class="slide first">
+                    <img src="./assest/images/levent-slide3.png" alt="">
+                </div>
+                <div class="slide">
+                    <img src="./assest/images/levent-slider2.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="./assest/images/levent-slider.jpg" alt="">
+                </div>
+                <div class="slide">
+                    <img src="./assest/images/levent-slide3.png" alt="">
+                </div>
+                <div class="navigation-auto">
+                    <div class="auto-btn1"></div>
+                    <div class="auto-btn2"></div>
+                    <div class="auto-btn3"></div>
+                    <div class="auto-btn4"></div>
+                </div>
+            </div>
+            <div class="navigation-manual">
+                <label for="radio1" class="manual-btn"></label>
+                <label for="radio2" class="manual-btn"></label>
+                <label for="radio3" class="manual-btn"></label>
+                <label for="radio4" class="manual-btn"></label>
+            </div>
+        </div> -->
+    </header>
+    <div id="about-header" >
+        <h1>#AboutUs</h1>
+        <p>SG4Store® - Popular Streetwear brand</p>
+    </div>
+
+    <section id="aboutus-content">
+        <div class="auc-box">
+            <div class="auc-img">
+                <img src="./assest/images/about/pic1.png" alt="">
+            </div>
+            <div class="auc-details">
+                <h2>CHÚNG TÔI LÀ AI?</h2>
+                <p>SG4Store® là lựa chọn hàng đầu dành cho các tín đồ thời trang Streetwear sành điệu. Sứ mệnh của SG4Store® là trao quyền cho thế hệ trẻ toàn thế giới tự do thể hiện phong cách thông qua thời trang, thương hiệu vượt qua ranh giới của thời trang streetwear bằng cách không ngừng sáng tạo các trang phục với các bộ sưu tập độc đáo.</p>
+            </div>
+        </div>
+    </section>
+                            
+    <div class="imageabu-tee">
+        <img src="./assest/images/about/pic3.png" alt="">
+
+    <section id="aboutus-content">
+        <div class="quality">
+            <div class="auc-box">
+                <div class="auc-details">
+                    <h2>CHẤT LƯỢNG TRẢI NGHIỆM 
+                        <br>VƯỢT TRỘI</h2>
+                    <p>Chúng tôi không ngừng nỗ lực, tập trung vào chất lượng sản phẩm và trải nghiệm mua sắm vượt trội nhất chưa từng có trước đây, các cửa hàng vật lý của chúng tôi, tối ưu hóa trải nghiệm, giúp người dùng mua sắm một sản phẩm cao cấp thật sự.
+                        <br>Mua sắm online dễ dàng, đa nền tảng trải nghiệm tuyệt vời. Giá thành hợp lý...</p>
+                    <a href="#">CONTINUE READING</a>
+                </div>
+                <div class="auc-img">
+                    <img src="./assest/images/about/pic2.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="auc-box">
+            <div class="auc-img">
+                <img src="./assest/images/about/pic4.png" alt="">
+            </div>
+            <div class="auc-details">
+                <h2>BIỂU TƯỢNG THỜI TRANG
+                    <br>THỜI ĐẠI MỚI</h2>
+                <p>Tại SG4Store®, mỗi sản phẩm đều mang theo sự cá tính và sành điệu, đại diện cho hình ảnh giới trẻ hiện đại - biểu tượng cho sự dẫn đầu phong cách thời đại mới.
+                    <br>Quần áo có thể sẽ lỗi thời nhưng phong cách thời trang thì không. Tầm nhìn độc đáo của SG4Store® chính là để mỗi cá nhân tự do thể hiện phong cách...
+                </p>
+                <a href="#">CONTINUE READING</a>    
+            </div>
+        </div>
+    </section>
+
+    <div class="imageabu-tee">
+        <img src="./assest/images/about/pic5.png" alt="">
+
+    <section id="aboutus-app">
+        <h1>Download Our App for 
+            <br><img class="dowload-img" src="./assest/images/play-store.png" alt=""> <img class="dowload-img" src="./assest/images/app-store.png" alt=""></h1>
+        <div class="img-app">
+            <img src="./assest/images/about/img-app.png" alt="">
+        </div>
+    </section>
+
+    
+    <!-- Footer -->
+    <div id="social-media">
+        <div class="social-container">
+            <p> FIND US ON SOCIAL MEDIA </p>
+            <div class="social-icons">
+                <a><img src="./assest/images/about/facebook-icon.png" alt=""></a>
+                <a><img src="./assest/images/about/instagram-icon.png" alt=""></a>
+                <a><img src="./assest/images/about/linkedin-icon.png" alt=""></a>
+                <a><img src="./assest/images/about/snapchat-icon.png" alt=""></a>
+                <a><img src="./assest/images/about/twitter-icon.png" alt=""></a>
+                <a><img src="./assest/images/about/whatsapp-icon.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer">
+        <img src="./assest/images/about/wave2.png" alt="" class="footer-img">
+        <div class="footer-container">
+            <div class="row">
+                <div class="col-4 footer-box">
+                    <img src="./assest/images/web/sg4__3_-removebg-preview.png" alt="">
+                    <p>Sự đầu tư từ chất lượng đóng gói, bao bì sản phẩm đến mỗi thước phim, hình ảnh cho tới cách làm chủ được nghệ thuật sắc màu và chỉn chu trong từng chi tiết đã đưa chúng tôi trở thành một trong những thương hiệu thời trang Streetwear được giới trẻ yêu thích, tin dùng hàng đầu tại Việt Nam.</p>
+                </div>
+                <div class="col-4 footer-box">
+                    <p><b> CONTACT US </b></p>
+                    <p><i class="ti ti-location-pin"></i>Việt Nam, Thành phố Hồ Chí Minh</p>
+                    <p><i class="ti ti-mobile"></i>+84 123456789</p>
+                    <p><i class="ti ti-email"></i>ddht@gmail.com</p>
+                </div> 
+                <div class="col-4 footer-box">
+                    <p><b> SUBSCRIBE NEWSLETTER </b></p>
+                    <input type="email" class="form-control" placeholder="Your Email">
+                    <button type="button" class="btn btn-footer">Subscribe</button>
+                </div>
+        </div>
+    </div>
+</body>
+ <!-- sticky -->
+ <script>
+    window.onscroll = function() {myFunction()};
+    
+    var header = document.getElementById("myHeader");
+    var sticky = header.offsetTop;
+    
+    function myFunction() {
+      if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }
+    </script>
+</html>
