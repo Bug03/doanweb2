@@ -9,10 +9,11 @@ if (!empty($_POST)) {
 	if (isset($_POST['id'])) {
 		$id = $_POST['id'];
 	}
-
+	print_r($_POST);
 	if (!empty($name)) {
 		$created_at = $updated_at = date('Y-m-d H:s:i');
 		//Luu vao database
+		
 		if ($id == '') {
 			$sql = 'insert into category(name, created_at, updated_at) values ("'.$name.'", "'.$created_at.'", "'.$updated_at.'")';
 		} else {

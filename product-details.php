@@ -1,118 +1,71 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+include 'header.php';
+require_once ('db/dbhelper.php');
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./vendors/css/normalize.css">
-    <link rel="stylesheet" href="./assest/css/style.css">
-    <!-- font google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;1,300&family=Roboto:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-    <title>SG4Store | Ecommerce Website Design</title>
-</head>
+
+
+$id = $_GET["id"] ?? '';
+
+$sql = "select sanpham.ID, sanpham.HinhSP, sanpham.TenSP, sanpham.MoTaSP ,sanpham.GiaSP, category.name, sanpham.created_at,galery.Hinh1,galery.Hinh2,galery.Hinh3  
+    from (sanpham left join category 
+    on sanpham.category_id = category.id)
+    inner join galery on sanpham.id = galery.product_id 
+    where sanpham.ID = $id";
+$row = executeSingleResult($sql);
+
+$TenSP = $row['TenSP'] ?? '';
+$HinhSP = $row['HinhSP'] ?? '';
+$MoTaSP = $row['MoTaSP'] ?? '';
+$GiaSP = $row['GiaSP'] ?? '';
+$categoryId = $row['category_id'] ?? '';
+$hinh1 = $row['Hinh1'] ?? '';
+$hinh2 = $row['Hinh2'] ?? '';
+$hinh3 = $row['Hinh3'] ?? '';
+?>
 
 <body>
-    <header class="header">
-        <div class="header-container">
-            <div class="header__topnavbar" style="background-color: #000">
-                <marquee behavior="scroll" direction="left" scrollamount="10">
-                    <div class="header-promotion">
-                            <i class="fa-solid fa-globe"></i>
-                        <span>DAILY SALE UP TO 15% PLUSCLUB, COLORFUL PAINT TEE </span>
-                    </div>   
-                </marquee>
-            </div>
-            <div class="header__navbar" id="myHeader">
-                <div class="header__logo">
-                    <a href="index.html"><img src="./assest/images/web/sg4-removebg-preview.png" alt="logo" width="125px">
-                    </a>
-                </div>
-                    <nav class="navbar">
-                        <ul id="MenuItems" class="header__navbar-list">
-                            <li><a href="index.html">TRANG CHỦ</a></li>
-                            <li><a href="products-shirt.html">ÁO</a></li>
-                            <li><a href="products-pants.html">QUẦN</a></li>
-                            <li><a href="products-accessories.html">PHỤ KIỆN</a></li>
-                        </ul>
-                    </nav>
-                <a href="account.html"><button style="border:none" class="icon-user"><i class="fa-solid fa-user"></i></button></a>
-                <a href="cart.html"><button style="border:none" ><i class="fa-solid fa-cart-shopping"></i></button></a>
-                <button style="border:none" class="js-search" ><i class="fa-solid fa-magnifying-glass"></i></button>
-                <img src="./assest/images/menu.png" class="menu-icon"
-                onclick="menutoggle()">
-            </div>
-            <div class="header_botnavbar">
-                <ul class="bot-nav-list">
-                    <li class="bot-nav-items">
-                        <a href="./aboutus.html">Về chúng tôi</a>
-                    </li>
-                    <li class="bot-nav-items">
-                        <a href="./stores.html">Danh sách cửa hàng</a>
-                    </li>
-                    <li class="bot-nav-items">
-                        <a href="./collection.html">Bộ sưu tập</a>
-                    </li>
-                    <li class="bot-nav-items">
-                        <a href="./blog.html">Blog</a>
-                    </li>
-                    <li class="bot-nav-items">
-                        <a href="#footer">Liên hệ</a>
-                    </li>
-                </ul>
-            </div>
-
-            
-        </div>
-    </header>
         <!-- Single product details -->
         <div class="container single-product">
             <div class="row">
                 <div class="col-2">
-                    <img src="./assest/images/tên spham-màu nha/products-details/green-tee.jpg" width="100%" id = "productImg" >
+                    <img src="<?php echo $HinhSP ?>" width="100%" id = "productImg" >
 
                     <div class="small-img-row">
                         <div class="small-img-col">
-                            <img src="./assest/images/tên spham-màu nha/products-details/green-tee.jpg" width="100%" class="small-img"  >
+                            <img src="<?= $HinhSP ?>" width="100%" class="small-img"  >
                         </div>
                         <div class="small-img-col">
-                            <img src="./assest/images/tên spham-màu nha/products-details/yellow-tee.jpg" width="100%" class="small-img">
+                            <img src="<?= $hinh1?>" width="100%" class="small-img">
                         </div>
                         <div class="small-img-col">
-                            <img src="./assest/images/tên spham-màu nha/products-details/red-tee.jpg" width="100%" class="small-img" >
+                            <img src="<?= $hinh2?>" width="100%" class="small-img" >
                         </div>
                         <div class="small-img-col">
-                            <img src="./assest/images/tên spham-màu nha/products-details/black-tee.jpg" width="100%" class="small-img">
+                            <img src="<?= $hinh3?>" width="100%" class="small-img">
                         </div>
                     </div>
 
 
                 </div>
                 <div class="col-2">
-                    <p>Trang chủ / Áo</p>
-                    <h1>SG4Store® POPULAR LOGO 2.0 TEE/ <span id="name">Green</span></h1>
-                    <h4>300.000 VND</h4>
-                    <select>
-                        <option>Chọn Size</option>
-                        <option>S</option>
-                        <option>M</option>
-                        <option>L</option>
-                        <option>XL</option>
-                    </select>
-                    <input type="number" value="1">
-                    <div href="" class="btn" onclick="showSuccessToast();">Thêm vào giỏ hàng</div>
-
+                    <p>Trang chủ / <?= $row['name']?></p>
+                    <h1><?= $TenSP?> <span id="name">Green</span></h1>
+                    <h4><?= number_format($row['GiaSP'], 0, '', ',')?> VND</h4>
+                    <form action="cart.php" method="post">
+                        <select name="size">
+                            <option>Chọn Size</option>
+                            <option>S</option>
+                            <option>M</option>
+                            <option>L</option>
+                            <option>XL</option>
+                        </select>
+                        <input type="number" name="Soluong" value="1">
+                       <button class="btn" style="width:50%">Thêm vào giỏ hàng</button>
+                    </form>
                     <h3>Chi tiết sản phẩm <i class="fa-solid fa-indent"></i></h3>
                     <br>
                     <p style="line-height: 18px ;">
-                        + SG4store® POPULAR LOGO 2.0 TEE
-                        MATERIAL: SG4 ORIGINAL – Phiên bản bề mặt vải không đổ lông mang cảm giác thoáng mát
-                        Sản phẩm thuộc bộ sưu tập Spring/ Summer 2022
+                        <?= $row['MoTaSP']?>
                     </p>
                 </div>
             </div>
@@ -307,24 +260,20 @@
         SmallImg[0].onclick = function()
         {
             productImg.src = SmallImg[0].src;
-            name = document.getElementById("name").innerHTML = "Green";
         }
 
         SmallImg[1].onclick = function()
         {
             productImg.src = SmallImg[1].src;
-            name = document.getElementById("name").innerHTML = "Yellow";
         }
 
         SmallImg[2].onclick = function() 
         {
             productImg.src = SmallImg[2].src;
-            name = document.getElementById("name").innerHTML = "Red";
         }
         SmallImg[3].onclick = function() 
         {
             productImg.src = SmallImg[3].src;
-            name = document.getElementById("name").innerHTML = "Black";
         }
     </script>
 
