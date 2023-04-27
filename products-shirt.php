@@ -1,7 +1,9 @@
 <?php
+session_start();
+ob_start();
 include 'header.php';
 require_once ('db/dbhelper.php');
-
+// session_destroy();
 
 $sql = "SELECT * FROM sanpham";
 $productList = executeResult($sql);
@@ -75,7 +77,9 @@ $productList = executeResult($sql);
                                         <div class="option">
                                             <div class="add separate">
                                                 <i class="fa-solid fa-cart-shopping"></i>
-                                                <div style= "display: inline-block;"onclick="showSuccessToast();">Thêm vào giỏ hàng</div>
+                                                <a href="order.php?id=%s" style="color:white;">
+                                                <div style= "display: inline-block;">Thêm vào giỏ hàng</div>
+                                                </a>
                                             </div>  
                                             <div class="infor">
                                                 <i class="fa-solid fa-eye"></i>
@@ -83,9 +87,9 @@ $productList = executeResult($sql);
                                             </div>
                                         </div>
                                     </div>'
-                                , $row['ID']
+                                , $row['ID'],$row['ID']
                             );
-                            $s .= '</div>';
+                            $s .= '</div>';                        
                         }
                     }
                     if ($countPerRow > 3) {
@@ -111,6 +115,7 @@ $productList = executeResult($sql);
         </div>
     </div>
     </div>
+    
     <!----------- footer ----------->
     <?php include 'footer.php';
     ?>
@@ -147,11 +152,31 @@ $productList = executeResult($sql);
 
         </div>
     </div>
-
+           
     <div id="toast">
-
     </div>
-    <script src="./assest/js/toast.js"></script>
+    <script src="./assest/js/toast.js">
+         
+    </script>
+    <script>
+        function showSuccessToast() {
+            toast({
+                title: "Thành công!",
+                message: "Bạn đã thêm sản phẩm vào giỏ hàng, ",
+                type: "success",
+                duration: 5000
+            });
+        }
+        function showErrorToast() {
+            toast({
+                title: "Thất bại!",
+                message: "Có lỗi xảy ra, vui lòng liên hệ quản trị viên.",
+                type: "error",
+                duration: 5000
+            });
+        }
+    </script>
+
     <!-- ---js for toggle menu ----->
     <script>
         var MenuItems = document.getElementById("MenuItems");
@@ -212,26 +237,23 @@ $productList = executeResult($sql);
             search.classList.toggle('active');
         }
     </script>
-    <!-- toast -->
     <script>
-        function showSuccessToast() {
-            toast({
-                title: "Thành công!",
-                message: "Bạn đã thêm sản phẩm vào giỏ hàng",
-                type: "success",
-                duration: 5000
-            });
-        }
-
-        function showErrorToast() {
-            toast({
-                title: "Thất bại!",
-                message: "Có lỗi xảy ra, vui lòng liên hệ quản trị viên.",
-                type: "error",
-                duration: 5000
-            });
+        function danh() {
+            console.log('danh');
         }
     </script>
+    <?php
+
+    if ($_SESSION['noti_cart'] == 1) {
+    echo'
+    <script>
+    showSuccessToast();
+     </script>
+    ';
+    $_SESSION['noti_cart'] = 0;
+    }
+?>
+}
 </body>
 
 </html>

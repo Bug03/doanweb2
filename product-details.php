@@ -6,13 +6,13 @@ require_once ('db/dbhelper.php');
 
 $id = $_GET["id"] ?? '';
 
+
 $sql = "select sanpham.ID, sanpham.HinhSP, sanpham.TenSP, sanpham.MoTaSP ,sanpham.GiaSP, category.name, sanpham.created_at,galery.Hinh1,galery.Hinh2,galery.Hinh3  
     from (sanpham left join category 
     on sanpham.category_id = category.id)
-    inner join galery on sanpham.id = galery.product_id 
+    left join galery on sanpham.id = galery.product_id 
     where sanpham.ID = $id";
 $row = executeSingleResult($sql);
-
 $TenSP = $row['TenSP'] ?? '';
 $HinhSP = $row['HinhSP'] ?? '';
 $MoTaSP = $row['MoTaSP'] ?? '';

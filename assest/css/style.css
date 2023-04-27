@@ -504,6 +504,14 @@ a {
     transform: translate(-50%);
 }
 
+.products-title-small {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: #555;
+}
+
+
 h4 {
     color: #555;
     font-weight: normal;
@@ -797,7 +805,6 @@ input:focus {
 }
 
 .cart-wrap {
-    border: 3px solid #000 ;
     padding: 20px 40px;
 }
 
@@ -810,48 +817,15 @@ input:focus {
     border-collapse: collapse ;
 }
 
-.cart-total {
-    margin-top: 20px;
-    display: flex;
-    justify-content: flex-end;
-}
-
-.cart-total p {
-    color: #ff523b;
-    font-weight: 500;
-}
-
-.cart-btn--remove {
-    margin-right: 10px;
-}
 
 
-.ordered {
-    padding: 10px 0 20px 0 ;
-    margin-bottom: 20px;
-}
 
-.ordered-title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: 500;
-    color: #555;
-}
-
-.ordered-content {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    border: 1px solid #333;
-    border-radius: 20px;
-    padding: 20px;
-    margin: 20px 0;
-}
 th {
-    padding: 5px;
-    color: #fff;
-    background-color: #ff523b;
-    font-weight: normal;
+    padding: 0 20px;
+    color:  #1c1c1c;
+    font-weight: 700;
+    padding-bottom:20px;
+    text-align: inherit;
 }
 
 
@@ -866,7 +840,7 @@ td {
 }
 
 .cart-wrap tr:last-child {
-    border-bottom:2px solid #000 ;
+    border-bottom:1px solid #000 ;
 }
 
 
@@ -876,114 +850,6 @@ td input {
     padding: 5px;
 }
 
-
-.cart-info {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-.cart-info a{
-    text-decoration: none;
-    color: #ff523b;
-    font-size: 12px;
-}
-
-.cart-info img {
-    width: 80px;
-    height: 80px;
-    margin-right: 100px;
-}
-
-.total-price {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.total-price table {
-    border-top: 3px solid #ff523b;
-    width: 100%;
-    max-width: 390px;
-}
-
-
-
-/* account page */
-.account-container {
-    max-width: 1300px;
-    margin: auto; 
-    padding: 0 25px;
-}
-
-.account-page {
-    padding: 50px 0;
-}
-
-.form-container {
-    background-color: #fff;
-    width: 300px;
-    height: 400px;
-    position: relative;
-    text-align: center;
-    padding: 20px 0;
-    margin: auto;
-    box-shadow: 0 0 20px 0px rgba(0,0,0, 0.1);
-    overflow: hidden;
-}
-
-.form-container span {
-    font-weight: bold;
-    padding: 0 10px;
-    color: #555;
-    cursor: pointer;
-    width: 100px;
-    display: inline-block;
-}
-
-.form-btn {
-    display: inline-block;
-}
-
-.form-container form {
-    max-width: 300px;
-    padding: 0 20px;
-    position: absolute;
-    top: 130px;
-    transition: transform 1s;
-}
-
-form input {
-    width: 100%;
-    height: 30px;
-    margin: 10px 0;
-    padding: 0 10px;
-    border: 1px solid #ccc;
-}
-
-form .btn {
-    width: 100%;
-    border: none;
-    cursor: pointer;
-    margin: 10px 0;
-}
-
-#LoginForm {
-    left: -300px;
-}
-
-#RegisterForm {
-    left: 0;
-}
-
-#Indicator {
-    width: 100px;
-    border: none;
-    background-color: #ff523b;
-    height: 3px;
-    margin-top: 8px;
-    transform: translateX(100px);
-    transition: transform 1s;
-}
 
 /* modal */
 .modal {
@@ -1600,6 +1466,11 @@ form .btn {
     color: #888;
     margin-top: 6px;
     line-height: 1.5;
+  }
+
+  .toast__msg a {
+    font-weight: 700;
+    color: rebeccapurple;
   }
   
   .toast__close {
