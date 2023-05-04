@@ -1,7 +1,8 @@
 <?php
 require_once ('../../db/dbhelper.php');
 
-$id = $TenSP = $HinhSP = $GiaSP = $MoTaSP = $category_id = '';
+$id = $TenSP = $HinhSP = $GiaSP = $MoTaSP = $category_id = $Color= '' ;
+
 // thêm sp
 if (!empty($_POST)) {
 	if (isset($_POST['TenSP'])) {
@@ -22,17 +23,21 @@ if (!empty($_POST)) {
 	if (isset($_POST['content'])) {
 		$MoTaSP = $_POST['content'];
 	}
+	if (isset($_POST['color'])) {
+		$Color = $_POST['color'];
+	}
+
 
 	if (!empty($TenSP)) {
 		$created_at = $updated_at = date('Y-m-d H:s:i');
 		//Luu vao database
 		if ($id == '') {
-			$sql = 'insert into sanpham(TenSP,HinhSP ,MoTaSP, GiaSP, category_id, created_at, updated_at) 
-			values ("'.$TenSP.'","'.$HinhSP.'","'.$MoTaSP.'","'.$GiaSP.'","'.$category_id.'" ,"'.$created_at.'", "'.$updated_at.'")';
+			$sql = 'insert into sanpham(TenSP,HinhSP ,MoTaSP, GiaSP, category_id, created_at, updated_at, color) 
+			values ("'.$TenSP.'","'.$HinhSP.'","'.$MoTaSP.'","'.$GiaSP.'","'.$category_id.'" ,"'.$created_at.'", "'.$updated_at.'", "'.$Color.'")';
  
 		} else {
 			$sql = 'update sanpham set TenSP = "'.$TenSP.'", updated_at = "'.$updated_at.'", HinhSP = "'.$HinhSP.'",
-			GiaSP = "'.$GiaSP.'", MoTaSP = "'.$MoTaSP.'", category_id = '.$category_id.'
+			GiaSP = "'.$GiaSP.'", MoTaSP = "'.$MoTaSP.'", category_id = '.$category_id.', color =  '.$Color.'
 			where id = '.$id;
 		}
 		execute($sql);
@@ -53,6 +58,7 @@ if (isset($_GET['id'])) { // lấy ra sản phẩm click vào
 		$MoTaSP = $product['MoTaSP'];
 		$GiaSP = $product['GiaSP'];
 		$category_id = $product['category_id'];
+		$Color = $product['color'];
 	}
 }
 ?>
@@ -110,6 +116,25 @@ if (isset($_GET['id'])) { // lấy ra sản phẩm click vào
 						}
 						?>
 					  </select>
+
+					</div>
+					
+					<div class="form-group">
+					  <label for="name">Màu sắc:</label>
+					  <select class="form-control" id="color" name="color">
+						<option value="-1">-- Lựa chọn màu sắc</option>
+						<?php
+						$sql = 'select * from color';
+						$colorList = executeResult($sql);
+						foreach ($colorList as $item) {
+							if ($Color == $item['id'] ) {
+								echo '<option selected value="'.$item['id'].'">'.$item['name'].'</option>';
+							}else {
+								echo '<option value="'.$item['id'].'">'.$item['name'].'</option>';
+							}
+						}
+						?>
+					  </select>
 					</div>
 					<div class="form-group">
 					  <label for="name">Giá bán:</label>
@@ -117,7 +142,7 @@ if (isset($_GET['id'])) { // lấy ra sản phẩm click vào
 					</div>
 					<div class="form-group">
 					  <label for="name">Hình Sản Phẩm:</label>
-					  <input required="true" type="text" class="form-control" id="HinhSP" name="HinhSP" value="<?=$HinhSP?>"">
+					  <input required="true" type="text" class="form-control" id="HinhSP" name="HinhSP" value="<?=$HinhSP?>">
 					</div>
 					<div class="form-group">
 					  <label for="name">Nội dung:</label>

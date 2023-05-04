@@ -74,5 +74,64 @@
     
                     
                 </div>
+                
             </header>
+            <div class="modal js-modal">
+                <div class="modal-container js-modal-container">
+                    <div class="modal-close js-modal-close">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                    </div>
+                    <header class="modal-header">
+                        <h3 class="modal-title">TÌM KIẾM SẢN PHẨM</h3>
+                    </header>
+                    <div class="modal-body">
+                            <div class="search-bar">
+                                <input type="text" placeholder="search anything" class="brandsearch" id="search-text">
+                                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                            <div class="search-extend">
+                                <select class="brandsearch" id="filter-category">
+                                    <option value="">Loại</option>
+                                    <option value="1">Áo</option>
+                                    <option value="2">Quần</option>
+                                    <option value="3">Phụ kiện</option>
+                                </select>
+                                <div> 
+                                    <input type="text" id="priceform" class="brandsearch" style="border:1px solid #ccc" placeholder="Giá từ"> &mdash; 
+                                    <input type="text" id="priceto" class="brandsearch" style="border:1px solid #ccc" placeholder="Đến"></div>
+                                </div>
+                            </div>
+                            <div class="search-container">
+                                <div class="searching">
+                                    <ul class="search-products" id="search-products">
+                                        <div class="row"> 
+                                                <h1 style="color: #ccc; text-align:center;">Không tìm thấy sản phẩm</h1>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
 </body>
+
+<!-- ajax search -->
+<script>
+    $(document).ready(function() {
+    $('.brandsearch').change(function(event) {
+        event.preventDefault();
+        var categoryFilter = $('#filter-category').val();
+        var search = $('#search-text').val();
+        var min_price = $('#priceform').val();
+        var max_price = $('#priceto').val();
+        $.ajax({
+        type: 'POST',
+        url: 'search-modal.php',
+        data: {categoryFilter: categoryFilter, search: search, min_price: min_price, max_price: max_price},
+        success: function(data) {
+            $('#search-products').html(data);
+        }
+        });
+    });
+    });
+</script>

@@ -86,9 +86,11 @@ foreach ($productList as $item) {
 			if(!option) {
 				return;
 			}
-
+			
+			
 			console.log(id)
 			//ajax - lenh post
+		
 			$.post('ajax.php', {
 				'id': id,
 				'action': 'delete'
