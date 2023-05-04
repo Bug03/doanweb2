@@ -1,12 +1,19 @@
 <?php
+
 session_start();
 ob_start();
 include 'header.php';
-require_once ('db/dbhelper.php');
-// session_destroy();
+require_once('db/dbhelper.php');
 
-$sql = "SELECT * FROM sanpham";
+//san pham ao
+$sql = "SELECT * FROM sanpham inner join category on category.id = sanpham.category_id inner join color on sanpham.color = color.id 
+where sanpham.category_id = 1";
 $productList = executeResult($sql);
+
+if (isset($_GET['searched']) && $_GET['searched'] == 1) {
+    $productList = $_SESSION['productList'];
+}
+
 ?>
 
 
@@ -24,98 +31,96 @@ $productList = executeResult($sql);
                         <div class="box-search-icon">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
-                        <div class="box-search-input">
-                            <input type="text" placeholder="Search" id="box-search-input">
-                        </div>
-                        <span class="box-search-clear" onclick="document.getElementById('box-search-input').value =' '">
-                            <i class="fa-regular fa-x"></i>
-                        </span>
-                    </div>
-                    <div class="box-search-extend">
-                        <select id="brandsearch">
-                            <option value="">Màu sắc</option>
-                            <option value="Áo">Đen</option>
-                            <option value="Quần">Trắng</option>
-                            <option value="Phụ kiện">Xanh</option>
-                            <option value="Phụ kiện">Tím</option>
-                            <option value="Phụ kiện">Vàng</option>
-                            <option value="Phụ kiện">Xám</option>
-                            <option value="Phụ kiện">Kem</option>
-                        </select>
-                        <div style="margin-left: 10px;">
-                            <input type="text" id="priceform" style="border:1px solid #ccc" placeholder="Giá từ">
-                            &mdash;
-                            <input type="text" id="priceto" style="border:1px solid #ccc" placeholder="Đến">
-                        </div>
+                        <form action="search.php" id="product-form" method="POST">
+                                    <div class="box-search-input">
+                                        <input type="text" placeholder="Search" id="box-search-input" name="search" onkeyup="">
+                                    </div>
+                                    <span class="box-search-clear" onclick="document.getElementById('box-search-input').value =' '">
+                                        <i class="fa-regular fa-x"></i>
+                                    </span>
+                            </div>
+                            <div class="box-search-extend">
+                                <select id="brandsearch" name="colorFilter" require="true">
+                                    <option value="">Màu sắc</option>
+                                    <option value="Xanh">Xanh</option>
+                                    <option value="Trắng">Trắng</option>
+                                    <option value="Đen">Đen</option>
+                                </select>
+                                <div style="margin-left: 10px;">
+                                    <input type="text" id="priceform" style="border:1px solid #ccc" placeholder="Giá từ" name="min-price">
+                                    &mdash;
+                                    <input type="text" id="priceto" style="border:1px solid #ccc" placeholder="Đến" name="max-price">
+                                    <input type="submit" style="display: none;">
+                                </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container" id="container1">
             <?php
-            if (count($productList) > 0) {
-                $soSP = count($productList);
-                $countPerRow = 0;
-                $s = ""; // biến s để nối chuỗi html
-                foreach ($productList as $row) {
-                    if ($countPerRow == 0) {
-                        // new row 
-                        $s .= '<div class="row">';
-                    }
-                    if ($countPerRow <= 4) {
-                        if ($row) {
-                            $countPerRow++;
-                            $s .= '<div class="col-4 col-4_products">';
-                            $s .= sprintf('<a href="product-details.php?id=%s">
-                                <img src="%s" alt=""></a>
-                                <h4>%s</h4>'
-                                , $row['ID'], $row['HinhSP'], $row['TenSP']
-                            );
-                            $s .= sprintf('<p>%s VND</p>', number_format($row['GiaSP'], 0, '', ','));
-                            $s .= sprintf(
-                                ' <div class="product-btn">
-                                        <div class="option">
-                                            <div class="add separate">
-                                                <i class="fa-solid fa-cart-shopping"></i>
-                                                <a href="order.php?id=%s" style="color:white;">
-                                                <div style= "display: inline-block;">Thêm vào giỏ hàng</div>
-                                                </a>
-                                            </div>  
-                                            <div class="infor">
-                                                <i class="fa-solid fa-eye"></i>
-                                                <a href="product-details.php?id=%s" style="color: #fff ;">Thông tin chi tiết</a>
+                if (count($productList) > 0) {
+                    $soSP = count($productList);
+                    $countPerRow = 0;
+                    $s = ""; // biến s để nối chuỗi html
+                    foreach ($productList as $row) {
+                        if ($countPerRow == 0) {
+                            // new row 
+                            $s .= '<div class="row">';
+                        }
+                        if ($countPerRow <= 4) {
+                            if ($row) {
+                                $countPerRow++;
+                                $s .= '<div class="col-4 col-4_products">';
+                                $s .= sprintf('<a href="product-details.php?id=%s">
+                                    <img src="%s" alt=""></a>
+                                    <h4>%s</h4>'
+                                    , $row['ID'], $row['HinhSP'], $row['TenSP']
+                                );
+                                $s .= sprintf('<p>%s VND</p>', number_format($row['GiaSP'], 0, '', ','));
+                                $s .= sprintf(
+                                    ' <div class="product-btn">
+                                            <div class="option">
+                                                <div class="add separate">
+                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                    <div style= "display: inline-block;"onclick="showSuccessToast();">Thêm vào giỏ hàng</div>
+                                                </div>  
+                                                <div class="infor">
+                                                    <i class="fa-solid fa-eye"></i>
+                                                    <a href="product-details.php?id=%s" style="color: #fff ;">Thông tin chi tiết</a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>'
-                                , $row['ID'],$row['ID']
-                            );
-                            $s .= '</div>';                        
+                                        </div>'
+                                    , $row['ID']
+                                );
+                                $s .= '</div>';
+                            }
+                        }
+                        if ($countPerRow > 3) {
+                            // end row 
+                            $s .= '</div>';
+                            $countPerRow = 0;
                         }
                     }
-                    if ($countPerRow > 3) {
-                        // end row 
+                    if ($countPerRow != 0) {
+                        // end row
                         $s .= '</div>';
-                        $countPerRow = 0;
                     }
-                }
-                if ($countPerRow != 0) {
-                    // end row
-                    $s .= '</div>';
-                }
-                echo ($s);
-                }
+                    echo ($s);
+                    }
             ?>
-            <div class="page-btn" style="text-align: center ;">
-                <span>1</span>
-                <span>2</span>
-                <span>3</span>
-                <span>4</span>
-                <span>&#8594</span>
             </div>
+        <div class="page-btn" style="text-align: center ;">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+            <span>4</span>
+            <span>&#8594</span>
+     </div>
         </div>
     </div>
     </div>
-    
+
     <!----------- footer ----------->
     <?php include 'footer.php';
     ?>
@@ -152,12 +157,31 @@ $productList = executeResult($sql);
 
         </div>
     </div>
-           
+
     <div id="toast">
     </div>
     <script src="./assest/js/toast.js">
-         
+
     </script>
+
+    <!-- ajax search -->
+    <script>
+    $(document).ready(function() {
+    $('#product-form').submit(function(event) {
+        event.preventDefault();
+        var formData = $(this).serialize();
+        $.ajax({
+        type: 'POST',
+        url: 'search.php',
+        data: formData,
+        success: function(data) {
+            $('#container1').html(data);
+        }
+        });
+    });
+    });
+    </script>
+
     <script>
         function showSuccessToast() {
             toast({
@@ -167,6 +191,7 @@ $productList = executeResult($sql);
                 duration: 5000
             });
         }
+
         function showErrorToast() {
             toast({
                 title: "Thất bại!",
@@ -182,11 +207,11 @@ $productList = executeResult($sql);
         var MenuItems = document.getElementById("MenuItems");
 
         MenuItems.style.maxHeight = "0px";
+
         function menutoggle() {
             if (MenuItems.style.maxHeight == "0px") {
                 MenuItems.style.maxHeight = "200px";
-            }
-            else {
+            } else {
                 MenuItems.style.maxHeight = "0px"
             }
         }
@@ -197,9 +222,11 @@ $productList = executeResult($sql);
         const modal = document.querySelector('.js-modal');
         const modalContainer = document.querySelector('.js-modal-container')
         const modalClose = document.querySelector('.js-modal-close')
+
         function showSearch() {
             modal.classList.add('open');
         }
+
         function hideSearch() {
             modal.classList.remove('open');
         }
@@ -210,13 +237,15 @@ $productList = executeResult($sql);
 
         modal.addEventListener('click', hideSearch);
 
-        modalContainer.addEventListener('click', function (event) {
+        modalContainer.addEventListener('click', function(event) {
             event.stopPropagation();
         })
     </script>
     <!-- sticky -->
     <script>
-        window.onscroll = function () { myFunction() };
+        window.onscroll = function() {
+            myFunction()
+        };
 
         var header = document.getElementById("myHeader");
         var sticky = header.offsetTop;
@@ -233,7 +262,7 @@ $productList = executeResult($sql);
     <script>
         const icon = document.querySelector('.box-search-icon');
         const search = document.querySelector('.box-search');
-        icon.onclick = function () {
+        icon.onclick = function() {
             search.classList.toggle('active');
         }
     </script>
@@ -245,15 +274,15 @@ $productList = executeResult($sql);
     <?php
 
     if ($_SESSION['noti_cart'] == 1) {
-    echo'
+        echo '
     <script>
     showSuccessToast();
      </script>
     ';
-    $_SESSION['noti_cart'] = 0;
+        $_SESSION['noti_cart'] = 0;
     }
-?>
-}
+    ?>
+
 </body>
 
 </html>
