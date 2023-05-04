@@ -1,6 +1,16 @@
 
 <?php
-    include 'header.php'
+    session_start();
+    ob_start();
+    include 'header.php';
+    require_once ('db/dbhelper.php');
+        //Tat ca san pham
+        $sql = "SELECT * FROM sanpham";
+        $productList = executeResult($sql);
+        
+        if(isset($_GET['searched']) && $_GET['searched'] == 1) {
+            $productList = $_SESSION['productList'];
+        }
 ?>
 <body>
     
@@ -106,7 +116,7 @@
                             <div class="option">
                                 <div class="add separate">
                                     <i class="fa-solid fa-cart-shopping"></i>
-                                    <div style= "display: inline-block;"onclick="showSuccessToast();">Thêm vào giỏ hàng</div>
+                                    <div style= "display: inline-block;" onclick="showSuccessToast();">Thêm vào giỏ hàng</div>
                                 </div>
                                 <div class="infor">
                                     <i class="fa-solid fa-eye"></i>
@@ -469,40 +479,15 @@ Quần siêu xinh luôn mng chất dày dặn lắm đáng tiền nha, chất l�
     include 'footer.php'
     ?>
 
-    <div class="modal js-modal">
-        <div class="modal-container js-modal-container">
-            <div class="modal-close js-modal-close">
-                <i class="fa-regular fa-circle-xmark"></i>
-            </div>
-            <header class="modal-header">
-                <h3 class="modal-title">TÌM KIẾM SẢN PHẨM</h3>
-            </header>
-            
-            <div class="modal-body">
-                <form action="" class="search-bar">
-                    <input type="text" name="" placeholder="search anything">
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </form>
-                <div class="search-extend">
-                    <select id="brandsearch">
-                        <option value="">Tất cả</option>
-                        <option value="Áo">Áo</option>
-                        <option value="Quần">Quần</option>
-                        <option value="Phụ kiện">Phụ kiện</option>
-                    </select>
-                    <div> 
-                        <input type="text" id="priceform" style="border:1px solid #ccc" placeholder="Giá từ"> &mdash; 
-                        <input type="text" id="priceto" style="border:1px solid #ccc" placeholder="Đến"></div>
-                    </div>
-                </div>
-            </div>
-    </div>
+
 
     <div id="toast"></div>
 
     <div>
 
+
     <script src="./assest/js/toast.js"></script>
+
     <!-- ---js for toggle menu ----->
     <script>
         var MenuItems = document.getElementById("MenuItems");
@@ -517,6 +502,7 @@ Quần siêu xinh luôn mng chất dày dặn lắm đáng tiền nha, chất l�
             }
         }
     </script>
+
     <!-- modal search jaavascript -->
     <script>
         const buyBtn = document.querySelector('.js-search');
@@ -575,6 +561,7 @@ Quần siêu xinh luôn mng chất dày dặn lắm đáng tiền nha, chất l�
           });
         }
       </script>
+
 </body>
 
 </html>
